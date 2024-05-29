@@ -1,20 +1,17 @@
 require('dotenv').config('path','./.env')
 const express = require('express');
-const morgan = require('morgan');
+const logger = require('morgan');
 const app = express();
 
-app.use(morgan('dev'))
+app.use(logger('dev'))
 
 app.use('/',require('./routes/indexRouter.js'));
 
 
-
-
-
+const generateError = require('./middlewares/error.js')
 const ErrorHandler = require('./utils/errorHandler.js');
-const { generateError } = require('./middlewares/error.js');
-app.all('*',(req, res,next) => {
-    next(new ErrorHandler(`Requested URL ${req.url} Not Found`,404))
+app.all( "*",(req, res, next) => {
+    next(new ErrorHandler(`Requested URL Not Found: ${req.url}`,404));
 })
 app.use(generateError)
 

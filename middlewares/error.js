@@ -1,10 +1,7 @@
-exports.generateError = (err, req,res,next)=>{
-    const statusCode = err.statusCode || 500;
-
-
-    res.status(statusCode).json({
+module.exports = (err,req,res,next) => {
+    res.status(err.statusCode || 500).json({
+        success:false,
         message:err.message,
-        erroe:err.name,
-        statusCode:err.statusCode
+        errName:err.name
     })
 }
