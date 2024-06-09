@@ -23,8 +23,15 @@ const studentSchema = new mongoose.Schema(
 );
 
 studentSchema.pre("save", function () {
+  if (!this.isModified("password")) return;
+
   let salt = bcrypt.genSaltSync(10);
   this.password = bcrypt.hashSync(this.password, salt);
 });
+
+studentSchema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 
 module.exports = mongoose.model("Student", studentSchema);
