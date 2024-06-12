@@ -1,5 +1,6 @@
 const { catchAsyncError } = require("../middlewares/catchAsyncError");
 const studentModel = require("../models/studentModel");
+const { settoken } = require("../utils/SetToken");
 const ErrorHandler = require("../utils/errorHandler");
 
 exports.homepage = catchAsyncError(async (req, res, next) => {
@@ -8,7 +9,7 @@ exports.homepage = catchAsyncError(async (req, res, next) => {
 
 exports.studentSignup = catchAsyncError(async (req, res, next) => {
   const student = await new studentModel(req.body).save();
-  res.status(200).json(student);
+  settoken(student, 201, res);
 });
 
 exports.studentSignin = catchAsyncError(async (req, res, next) => {
@@ -25,11 +26,13 @@ exports.studentSignin = catchAsyncError(async (req, res, next) => {
       )
     );
 
-  const isMatched =await student.comparePassword(req.body.password);
+  const isMatched = await student.comparePassword(req.body.password);
   if (!isMatched) return next(new ErrorHandler("Password do not matched", 404));
 
-
-  res.json(student);
+  settoken(student, 200, res);
 });
 
-exports.studentSignout = catchAsyncError(async (req, res) => {});
+exports.studentSignout = catchAsyncError(async (req, res) => {
+  res.clearCookie('token')
+  res.json({success:'Successfully signed out!'})
+});
