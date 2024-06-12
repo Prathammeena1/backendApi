@@ -12,6 +12,15 @@ app.use(require("morgan")("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+// session
+const expressSession = require('express-session')
+app.use(expressSession({
+  resave:true,
+  saveUninitialized:true,
+  secret:process.env.EXPRESS_SESSION_SECRET
+}))
+
+
 
 
 app.use("/", require("./routes/indexRouter.js"));
