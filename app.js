@@ -19,7 +19,9 @@ app.use(expressSession({
   saveUninitialized:true,
   secret:process.env.EXPRESS_SESSION_SECRET
 }))
-
+// cookie parser
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 
 
