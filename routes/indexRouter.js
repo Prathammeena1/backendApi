@@ -5,18 +5,19 @@ const {
   studentSignin,
   studentSignout,
 } = require("../controllers/indexControllers");
+const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
 // GET /
-router.get("/", homepage);
+router.get("/",isAuthenticated, homepage);
 
 // POST /student/signup
 router.post("/student/signup", studentSignup);
 
-// POST /student/signup
+// POST /student/signin
 router.post("/student/signin", studentSignin);
 
-// GET /student/signup
-router.get("/student/signout", studentSignout);
+// GET /student/signout
+router.get("/student/signout",isAuthenticated, studentSignout);
 
 module.exports = router;

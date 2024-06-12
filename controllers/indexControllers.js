@@ -4,7 +4,7 @@ const { settoken } = require("../utils/SetToken");
 const ErrorHandler = require("../utils/errorHandler");
 
 exports.homepage = catchAsyncError(async (req, res, next) => {
-  res.status(200).json({ success: true, message: "Homepage" });
+  res.status(200).json({ success: true, message: "Protected Homepage" });
 });
 
 exports.studentSignup = catchAsyncError(async (req, res, next) => {
