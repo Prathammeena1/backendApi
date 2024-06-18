@@ -19,6 +19,10 @@ const studentSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
+    resetPasswordToken: {
+      type:Number,
+      default: 0,
+    }
   },
   { timestamps: true }
 );
