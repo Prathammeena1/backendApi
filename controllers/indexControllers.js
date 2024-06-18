@@ -54,6 +54,16 @@ exports.studentSendmail = catchAsyncError(async (req, res, next) => {
   }`;
 
   SendMail(req, res, next, url);
+});
 
-  // res.status(200).json({ student, url });
+exports.studentForgetLink = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.params.id).exec();
+
+  if (!student) return next(new ErrorHandler(`User not registered with this email address: ${req.body.email}`,404));
+
+  student.password = req.body.password;
+  await student.save();
+
+  res.status(200).json({message:'password reset successfully'})
+
 });
