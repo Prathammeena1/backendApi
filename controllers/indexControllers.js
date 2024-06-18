@@ -1,5 +1,6 @@
 const { catchAsyncError } = require("../middlewares/catchAsyncError");
 const studentModel = require("../models/studentModel");
+const { SendMail } = require("../utils/SendMail");
 const { settoken } = require("../utils/SetToken");
 const ErrorHandler = require("../utils/errorHandler");
 
@@ -33,6 +34,26 @@ exports.studentSignin = catchAsyncError(async (req, res, next) => {
 });
 
 exports.studentSignout = catchAsyncError(async (req, res) => {
-  res.clearCookie('token')
-  res.json({success:'Successfully signed out!'})
+  res.clearCookie("token");
+  res.json({ success: "Successfully signed out!" });
+});
+
+exports.studentSendmail = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findOne({ email: req.body.email }).exec();
+
+  if (!student)
+    return next(
+      new ErrorHandler(
+        `User not registered with this email address: ${req.body.email}`,
+        404
+      )
+    );
+
+  const url = `${req.protocol}://${req.get("host")}/student/forget-link/${
+    student._id
+  }`;
+
+  SendMail(req, res, next, url);
+
+  // res.status(200).json({ student, url });
 });

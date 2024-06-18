@@ -4,6 +4,7 @@ const {
   studentSignup,
   studentSignin,
   studentSignout,
+  studentSendmail,
 } = require("../controllers/indexControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -19,5 +20,8 @@ router.post("/student/signin", studentSignin);
 
 // GET /student/signout
 router.get("/student/signout",isAuthenticated, studentSignout);
+
+// POST /student/send-mail
+router.post("/student/sendmail", studentSendmail);
 
 module.exports = router;
