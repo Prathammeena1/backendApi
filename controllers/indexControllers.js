@@ -29,7 +29,6 @@ exports.studentSignin = catchAsyncError(async (req, res, next) => {
 
   const isMatched = await student.comparePassword(req.body.password);
   if (!isMatched) return next(new ErrorHandler("Password do not matched", 404));
-
   settoken(student, 200, res);
 });
 
@@ -78,4 +77,11 @@ exports.studentForgetLink = catchAsyncError(async (req, res, next) => {
   }
 
   res.status(200).json({ message: "password reset successfully" });
+});
+
+exports.studentResetPassword = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.params.id).exec();
+  student.password = req.body.password;
+  await student.save();
+  settoken(student, 201, res);
 });

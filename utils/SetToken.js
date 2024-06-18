@@ -1,4 +1,5 @@
 exports.settoken = async (student, statusCode, res) => {
+  
   const token = await student.getJwtToken();
   const options = {
     expires: new Date(
