@@ -90,3 +90,7 @@ exports.studentUpdate = catchAsyncError(async (req, res, next) => {
   await studentModel.findByIdAndUpdate(req.params.id,req.body).exec();
   res.status(200).json({success:true,message:'student updated successfully'})
 });
+
+exports.studentAvatar = catchAsyncError(async (req, res, next) => {
+  res.json({file: req.files})
+});
