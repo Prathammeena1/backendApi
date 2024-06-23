@@ -85,3 +85,8 @@ exports.studentResetPassword = catchAsyncError(async (req, res, next) => {
   await student.save();
   settoken(student, 201, res);
 });
+
+exports.studentUpdate = catchAsyncError(async (req, res, next) => {
+  await studentModel.findByIdAndUpdate(req.params.id,req.body).exec();
+  res.status(200).json({success:true,message:'student updated successfully'})
+});

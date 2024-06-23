@@ -4,12 +4,12 @@ const jwt = require("jsonwebtoken");
 
 const studentSchema = new mongoose.Schema(
   {
-    firstName:{
+    firstname:{
       type: String,
       required: [true, "First Name is required"],
       trim: true,
     },
-    lastName:{
+    lastname:{
       type: String,
       required: [true, "Last Name is required"],
       trim: true,
@@ -29,7 +29,8 @@ const studentSchema = new mongoose.Schema(
     },
     gender:{
       type:String,
-      enum: ["Male", "Female","Others"],
+      enum: ["Male", "Female", "Others"],
+      required:[true, "Gender is required"]
     },
     email: {
       type: String,
