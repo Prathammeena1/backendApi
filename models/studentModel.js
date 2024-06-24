@@ -14,7 +14,6 @@ const studentSchema = new mongoose.Schema(
       required: [true, "Last Name is required"],
       trim: true,
     },
-    avatar:String,
     contact:{
       type: String,
       required: [true, "First Name is required"],
@@ -50,7 +49,14 @@ const studentSchema = new mongoose.Schema(
     resetPasswordToken: {
       type:Number,
       default: 0,
-    }
+    },
+    avatar:{
+      type:Object,
+      default:{
+        fileId:'',
+        url:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      }
+    },
   },
   { timestamps: true }
 );
