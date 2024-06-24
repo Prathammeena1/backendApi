@@ -7,7 +7,8 @@ const path = require("path");
 const imagekit = require("../utils/ImageKit").initImageKit();
 
 exports.homepage = catchAsyncError(async (req, res, next) => {
-  res.status(200).json({ success: true, message: "Protected Homepage" });
+  const student = await studentModel.findById(req.id);
+  res.status(200).json({ success: true, message: "Protected Homepage",student });
 });
 
 exports.studentSignup = catchAsyncError(async (req, res, next) => {
