@@ -1,4 +1,4 @@
-exports.settoken = async (student, statusCode, res) => {
+exports.settoken = async (student, statusCode, res, req) => {
   
   const token = await student.getJwtToken();
   const options = {

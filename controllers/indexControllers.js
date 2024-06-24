@@ -29,6 +29,8 @@ exports.studentSignin = catchAsyncError(async (req, res, next) => {
       )
     );
 
+  
+
   const isMatched = await student.comparePassword(req.body.password);
   if (!isMatched) return next(new ErrorHandler("Password do not matched", 404));
   settoken(student, 200, res);
