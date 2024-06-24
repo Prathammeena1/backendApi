@@ -12,6 +12,9 @@ const {
   addinternships,
   editinternships,
   deleteinternships,
+  addResponsibilities,
+  editResponsibilities,
+  deleteResponsibilities,
 } = require("../controllers/resumeControllers");
 
 // GET /
@@ -51,6 +54,17 @@ router.post("/edit-internships/:internshipId", isAuthenticated, editinternships)
 
 // POST /
 router.post("/delete-internships/:internshipId", isAuthenticated, deleteinternships);
+
+// -----------------------------responsibilities --------------------------------
+
+// POST /
+router.post("/add-responsibilities/", isAuthenticated, addResponsibilities);
+
+// POST /
+router.post("/edit-responsibilities/:responsibilitiesId", isAuthenticated, editResponsibilities);
+
+// POST /
+router.post("/delete-responsibilities/:responsibilitiesId", isAuthenticated, deleteResponsibilities);
 
 
 module.exports = router;
