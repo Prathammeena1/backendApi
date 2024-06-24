@@ -8,6 +8,8 @@ exports.resume = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ resume });
 });
 
+// --------------Education------------------------
+
 exports.addEducation = catchAsyncError(async (req, res, next) => {
   const student = await studentModel.findById(req.id).exec();
   student.resume.education.push({ ...req.body, id: uuidv4() });
@@ -34,7 +36,37 @@ exports.deleteEducation = catchAsyncError(async (req, res, next) => {
   const filteredEducation = student.resume.education.filter(
     (e) => e.id !== req.params.educationId
   );
-  student.resume.education = filteredEducation
+  student.resume.education = filteredEducation;
   await student.save();
   res.status(200).json({ message: "education deleted successfully!" });
+});
+
+// --------------Jobs------------------------
+
+exports.addJobs = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  student.resume.jobs.push({ ...req.body, id: uuidv4() });
+  await student.save();
+  res.status(200).json({ message: "Jobs added successfully!" });
+});
+
+exports.editJobs = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  const index = student.resume.jobs.findIndex((e) => e.id == req.params.jobId);
+  student.resume.jobs[index] = {
+    ...student.resume.jobs[index],
+    ...req.body,
+  };
+  await student.save();
+  res.status(200).json({ message: "jobs edited successfully!" });
+});
+
+exports.deleteJobs = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  const filteredJobs = student.resume.jobs.filter(
+    (e) => e.id !== req.params.jobId
+  );
+  student.resume.jobs = filteredJobs;
+  await student.save();
+  res.status(200).json({ message: "jobs deleted successfully!" });
 });
