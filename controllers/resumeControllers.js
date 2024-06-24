@@ -8,7 +8,7 @@ exports.resume = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ resume });
 });
 
-// --------------Education------------------------
+// -------------------------------Education-----------------------------------
 
 exports.addEducation = catchAsyncError(async (req, res, next) => {
   const student = await studentModel.findById(req.id).exec();
@@ -41,7 +41,7 @@ exports.deleteEducation = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ message: "education deleted successfully!" });
 });
 
-// --------------Jobs------------------------
+// -------------------------------Jobs-----------------------------------
 
 exports.addJobs = catchAsyncError(async (req, res, next) => {
   const student = await studentModel.findById(req.id).exec();
@@ -69,4 +69,35 @@ exports.deleteJobs = catchAsyncError(async (req, res, next) => {
   student.resume.jobs = filteredJobs;
   await student.save();
   res.status(200).json({ message: "jobs deleted successfully!" });
+});
+
+
+// -------------------------------Internships-----------------------------------
+
+exports.addinternships = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  student.resume.internships.push({ ...req.body, id: uuidv4() });
+  await student.save();
+  res.status(200).json({ message: "internships added successfully!" });
+});
+
+exports.editinternships = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  const index = student.resume.internships.findIndex((e) => e.id == req.params.internshipId);
+  student.resume.internships[index] = {
+    ...student.resume.internships[index],
+    ...req.body,
+  };
+  await student.save();
+  res.status(200).json({ message: "internships edited successfully!" });
+});
+
+exports.deleteinternships = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id).exec();
+  const filteredinternships = student.resume.internships.filter(
+    (e) => e.id !== req.params.internshipId
+  );
+  student.resume.internships = filteredinternships;
+  await student.save();
+  res.status(200).json({ message: "internships deleted successfully!" });
 });

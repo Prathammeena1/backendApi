@@ -9,6 +9,9 @@ const {
   addJobs,
   editJobs,
   deleteJobs,
+  addinternships,
+  editinternships,
+  deleteinternships,
 } = require("../controllers/resumeControllers");
 
 // GET /
@@ -36,6 +39,18 @@ router.post("/edit-jobs/:jobId", isAuthenticated, editJobs);
 
 // POST /
 router.post("/delete-jobs/:jobId", isAuthenticated, deleteJobs);
+
+
+// -----------------------------internships --------------------------------
+
+// POST /
+router.post("/add-internships/", isAuthenticated, addinternships);
+
+// POST /
+router.post("/edit-internships/:internshipId", isAuthenticated, editinternships);
+
+// POST /
+router.post("/delete-internships/:internshipId", isAuthenticated, deleteinternships);
 
 
 module.exports = router;
