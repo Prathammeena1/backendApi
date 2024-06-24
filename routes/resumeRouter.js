@@ -15,6 +15,12 @@ const {
   addResponsibilities,
   editResponsibilities,
   deleteResponsibilities,
+  addCourses,
+  editCourses,
+  deleteCourses,
+  addProjects,
+  editProjects,
+  deleteProjects,
 } = require("../controllers/resumeControllers");
 
 // GET /
@@ -65,6 +71,32 @@ router.post("/edit-responsibilities/:responsibilitiesId", isAuthenticated, editR
 
 // POST /
 router.post("/delete-responsibilities/:responsibilitiesId", isAuthenticated, deleteResponsibilities);
+
+
+// -----------------------------courses --------------------------------
+
+// POST /
+router.post("/add-courses/", isAuthenticated, addCourses);
+
+// POST /
+router.post("/edit-courses/:coursesId", isAuthenticated, editCourses);
+
+// POST /
+router.post("/delete-courses/:coursesId", isAuthenticated, deleteCourses);
+
+
+
+
+// -----------------------------projects --------------------------------
+
+// POST /
+router.post("/add-projects/", isAuthenticated, addProjects);
+
+// POST /
+router.post("/edit-projects/:projectsId", isAuthenticated, editProjects);
+
+// POST /
+router.post("/delete-projects/:projectsId", isAuthenticated, deleteProjects);
 
 
 module.exports = router;
