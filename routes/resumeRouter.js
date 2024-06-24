@@ -24,6 +24,9 @@ const {
   addSkills,
   editSkills,
   deleteSkills,
+  addAccomplishments,
+  editAccomplishments,
+  deleteAccomplishments,
 } = require("../controllers/resumeControllers");
 
 // GET /
@@ -115,5 +118,18 @@ router.post("/edit-skills/:skillsId", isAuthenticated, editSkills);
 
 // POST /
 router.post("/delete-skills/:skillsId", isAuthenticated, deleteSkills);
+
+
+
+// -----------------------------accomplishments --------------------------------
+
+// POST /
+router.post("/add-accomplishments/", isAuthenticated, addAccomplishments);
+
+// POST /
+router.post("/edit-accomplishments/:accomplishmentsId", isAuthenticated, editAccomplishments);
+
+// POST /
+router.post("/delete-accomplishments/:accomplishmentsId", isAuthenticated, deleteAccomplishments);
 
 module.exports = router;
