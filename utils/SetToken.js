@@ -1,6 +1,6 @@
-exports.settoken = async (student, statusCode, res, req) => {
+exports.settoken = async (employee, statusCode, res, req) => {
   
-  const token = await student.getJwtToken();
+  const token = await employee.getJwtToken();
   const options = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
@@ -12,5 +12,5 @@ exports.settoken = async (student, statusCode, res, req) => {
   res
     .status(statusCode)
     .cookie("token", token, options)
-    .json({ success: true, id: student._id, token });
+    .json({ success: true, id: employee._id, token });
 };

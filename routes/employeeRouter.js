@@ -1,43 +1,43 @@
 const express = require("express");
 const {
   homepage,
-  studentSignup,
-  studentSignin,
-  studentSignout,
-  studentSendmail,
-  studentForgetLink,
-  studentResetPassword,
-  studentUpdate,
-  studentAvatar,
-} = require("../controllers/indexControllers");
+  employeeSignup,
+  employeeSignin,
+  employeeSignout,
+  employeeSendmail,
+  // employeeForgetLink,
+  // employeeResetPassword,
+  // employeeUpdate,
+  // employeeAvatar,
+} = require("../controllers/employeeControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
 // GET /
-router.get("/student",isAuthenticated, homepage);
+router.get("/", homepage);
 
-// POST /student/signup
-router.post("/student/signup", studentSignup);
+// POST /signup
+router.post("/signup", employeeSignup);
 
-// POST /student/signin
-router.post("/student/signin", studentSignin);
+// POST /signin
+router.post("/signin", employeeSignin);
 
-// GET /student/signout
-router.get("/student/signout",isAuthenticated, studentSignout);
+// GET /signout
+router.get("/signout",isAuthenticated, employeeSignout);
 
-// POST /student/send-mail
-router.post("/student/sendmail", studentSendmail);
+// POST /send-mail
+router.post("/sendmail", employeeSendmail);
 
-// GET /student/forget-link/:id
-router.get("/student/forget-link/:id", studentForgetLink);
+// // GET /forget-link/:id
+// router.get("/forget-link/:id", employeeForgetLink);
 
-// POST /student/reset-password
-router.post("/student/resetpassword/:id",isAuthenticated, studentResetPassword);
+// // POST /reset-password
+// router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
 
-// POST /student/update
-router.post("/student/update/:id",isAuthenticated, studentUpdate);
+// // POST /update
+// router.post("/update/:id",isAuthenticated, employeeUpdate);
 
-// POST /student/update
-router.post("/student/avatar/:id",isAuthenticated, studentAvatar);
+// // POST /update
+// router.post("/avatar/:id",isAuthenticated, employeeAvatar);
 
 module.exports = router;
