@@ -7,7 +7,7 @@ const {
   employeeSendmail,
   employeeForgetLink,
   employeeResetPassword,
-  // employeeUpdate,
+  employeeUpdate,
   // employeeAvatar,
 } = require("../controllers/employeeControllers");
 const { isAuthenticated } = require("../middlewares/auth");
@@ -34,8 +34,8 @@ router.get("/forget-link/:id", employeeForgetLink);
 // POST /reset-password
 router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
 
-// // POST /update
-// router.post("/update/:id",isAuthenticated, employeeUpdate);
+// POST /update
+router.post("/update/:id",isAuthenticated, employeeUpdate);
 
 // // POST /update
 // router.post("/avatar/:id",isAuthenticated, employeeAvatar);

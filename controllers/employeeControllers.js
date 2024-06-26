@@ -87,12 +87,12 @@ exports.employeeResetPassword = catchAsyncError(async (req, res, next) => {
   settoken(employee, 201, res);
 });
 
-// exports.employeeUpdate = catchAsyncError(async (req, res, next) => {
-//   await employeeModel.findByIdAndUpdate(req.params.id, req.body).exec();
-//   res
-//     .status(200)
-//     .json({ success: true, message: "employee updated successfully" });
-// });
+exports.employeeUpdate = catchAsyncError(async (req, res, next) => {
+  await employeeModel.findByIdAndUpdate(req.params.id, req.body).exec();
+  res
+    .status(200)
+    .json({ success: true, message: "employee updated successfully" });
+});
 
 // exports.employeeAvatar = catchAsyncError(async (req, res, next) => {
 //   const employee = await employeeModel.findById(req.params.id);
