@@ -80,12 +80,12 @@ exports.employeeForgetLink = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ message: "password reset successfully" });
 });
 
-// exports.employeeResetPassword = catchAsyncError(async (req, res, next) => {
-//   const employee = await employeeModel.findById(req.params.id).exec();
-//   employee.password = req.body.password;
-//   await employee.save();
-//   settoken(employee, 201, res);
-// });
+exports.employeeResetPassword = catchAsyncError(async (req, res, next) => {
+  const employee = await employeeModel.findById(req.params.id).exec();
+  employee.password = req.body.password;
+  await employee.save();
+  settoken(employee, 201, res);
+});
 
 // exports.employeeUpdate = catchAsyncError(async (req, res, next) => {
 //   await employeeModel.findByIdAndUpdate(req.params.id, req.body).exec();

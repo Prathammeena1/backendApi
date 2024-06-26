@@ -5,8 +5,8 @@ const {
   employeeSignin,
   employeeSignout,
   employeeSendmail,
-  // employeeForgetLink,
-  // employeeResetPassword,
+  employeeForgetLink,
+  employeeResetPassword,
   // employeeUpdate,
   // employeeAvatar,
 } = require("../controllers/employeeControllers");
@@ -31,8 +31,8 @@ router.post("/sendmail", employeeSendmail);
 // GET /forget-link/:id
 router.get("/forget-link/:id", employeeForgetLink);
 
-// // POST /reset-password
-// router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
+// POST /reset-password
+router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
 
 // // POST /update
 // router.post("/update/:id",isAuthenticated, employeeUpdate);
