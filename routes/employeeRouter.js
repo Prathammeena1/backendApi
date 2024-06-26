@@ -28,8 +28,8 @@ router.get("/signout",isAuthenticated, employeeSignout);
 // POST /send-mail
 router.post("/sendmail", employeeSendmail);
 
-// // GET /forget-link/:id
-// router.get("/forget-link/:id", employeeForgetLink);
+// GET /forget-link/:id
+router.get("/forget-link/:id", employeeForgetLink);
 
 // // POST /reset-password
 // router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);

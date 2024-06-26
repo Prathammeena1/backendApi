@@ -58,27 +58,27 @@ exports.employeeSendmail = catchAsyncError(async (req, res, next) => {
   employee.save();
 });
 
-// exports.employeeForgetLink = catchAsyncError(async (req, res, next) => {
-//   const employee = await employeeModel.findById(req.params.id).exec();
+exports.employeeForgetLink = catchAsyncError(async (req, res, next) => {
+  const employee = await employeeModel.findById(req.params.id).exec();
 
-//   if (!employee)
-//     return next(
-//       new ErrorHandler(
-//         `User not registered with this email address: ${req.body.email}`,
-//         404
-//       )
-//     );
+  if (!employee)
+    return next(
+      new ErrorHandler(
+        `User not registered with this email address: ${req.body.email}`,
+        404
+      )
+    );
 
-//   if (employee.resetPasswordToken == 1) {
-//     employee.resetPasswordToken = 0;
-//     employee.password = req.body.password;
-//     await employee.save();
-//   } else {
-//     return next(new ErrorHandler(`Invalid password reset link`, 500));
-//   }
+  if (employee.resetPasswordToken == 1) {
+    employee.resetPasswordToken = 0;
+    employee.password = req.body.password;
+    await employee.save();
+  } else {
+    return next(new ErrorHandler(`Invalid password reset link`, 500));
+  }
 
-//   res.status(200).json({ message: "password reset successfully" });
-// });
+  res.status(200).json({ message: "password reset successfully" });
+});
 
 // exports.employeeResetPassword = catchAsyncError(async (req, res, next) => {
 //   const employee = await employeeModel.findById(req.params.id).exec();
