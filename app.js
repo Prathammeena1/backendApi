@@ -30,6 +30,7 @@ app.use(fileupload());
 
 app.use("/", require("./routes/indexRouter.js"));
 app.use("/resume", require("./routes/resumeRouter.js"));
+app.use("/employee", require("./routes/employeeRouter.js"));
 
 // error handler
 const generateError = require("./middlewares/error.js");
