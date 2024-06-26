@@ -8,7 +8,7 @@ const {
   employeeForgetLink,
   employeeResetPassword,
   employeeUpdate,
-  // employeeAvatar,
+  employeeAvatar,
 } = require("../controllers/employeeControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -37,7 +37,7 @@ router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
 // POST /update
 router.post("/update/:id",isAuthenticated, employeeUpdate);
 
-// // POST /update
-// router.post("/avatar/:id",isAuthenticated, employeeAvatar);
+// POST /update
+router.post("/avatar/:id",isAuthenticated, employeeAvatar);
 
 module.exports = router;

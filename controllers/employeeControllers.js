@@ -94,24 +94,24 @@ exports.employeeUpdate = catchAsyncError(async (req, res, next) => {
     .json({ success: true, message: "employee updated successfully" });
 });
 
-// exports.employeeAvatar = catchAsyncError(async (req, res, next) => {
-//   const employee = await employeeModel.findById(req.params.id);
-//   const file = req.files.avatar;
-//   const modifiedFileName = `resumebuilder-${Date.now()}${path.extname(
-//     file.name
-//   )}`;
+exports.employeeAvatar = catchAsyncError(async (req, res, next) => {
+  const employee = await employeeModel.findById(req.params.id);
+  const file = req.files.avatar;
+  const modifiedFileName = `resumebuilder-${Date.now()}${path.extname(
+    file.name
+  )}`;
 
-//   const { fileId, url } = await imagekit.upload({
-//     file: file.data,
-//     fileName: modifiedFileName,
-//   });
+  const { fileId, url } = await imagekit.upload({
+    file: file.data,
+    fileName: modifiedFileName,
+  });
 
-//   if (employee.avatar.fileId !== "") {
-//     await imagekit.deleteFile(employee.avatar.fileId);
-//   }
+  if (employee.avatar.fileId !== "") {
+    await imagekit.deleteFile(employee.avatar.fileId);
+  }
 
-//   employee.avatar = { fileId, url };
-//   await employee.save();
+  employee.avatar = { fileId, url };
+  await employee.save();
 
-//   res.json({ employee });
-// });
+  res.json({ employee });
+});
