@@ -9,6 +9,7 @@ const {
   employeeResetPassword,
   employeeUpdate,
   employeeOrganisationlogo,
+  createInternship,
 } = require("../controllers/employeeControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -37,7 +38,14 @@ router.post("/resetpassword/:id",isAuthenticated, employeeResetPassword);
 // POST /update
 router.post("/update/:id",isAuthenticated, employeeUpdate);
 
-// POST /update
+// POST /oreganisationlog/:id
 router.post("/organisationlogo/:id",isAuthenticated, employeeOrganisationlogo);
+
+
+// ----------------------------------------- internships -------------------------------
+
+
+// POST /internship/create
+router.post("/internship/create",isAuthenticated, createInternship);
 
 module.exports = router;
