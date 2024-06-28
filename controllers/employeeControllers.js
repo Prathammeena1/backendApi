@@ -95,9 +95,9 @@ exports.employeeUpdate = catchAsyncError(async (req, res, next) => {
     .json({ success: true, message: "employee updated successfully" });
 });
 
-exports.employeeAvatar = catchAsyncError(async (req, res, next) => {
+exports.employeeOrganisationlogo = catchAsyncError(async (req, res, next) => {
   const employee = await employeeModel.findById(req.params.id);
-  const file = req.files.avatar;
+  const file = req.files.organisationlogo;
   const modifiedFileName = `resumebuilder-${Date.now()}${path.extname(
     file.name
   )}`;
@@ -107,11 +107,11 @@ exports.employeeAvatar = catchAsyncError(async (req, res, next) => {
     fileName: modifiedFileName,
   });
 
-  if (employee.avatar.fileId !== "") {
-    await imagekit.deleteFile(employee.avatar.fileId);
+  if (employee.organisationlogo.fileId !== "") {
+    await imagekit.deleteFile(employee.organisationlogo.fileId);
   }
 
-  employee.avatar = { fileId, url };
+  employee.organisationlogo = { fileId, url };
   await employee.save();
 
   res.json({ employee });
