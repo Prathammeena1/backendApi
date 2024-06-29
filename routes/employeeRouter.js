@@ -10,6 +10,8 @@ const {
   employeeUpdate,
   employeeOrganisationlogo,
   createInternship,
+  readInternship,
+  readSingleInternship,
 } = require("../controllers/employeeControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -47,5 +49,11 @@ router.post("/organisationlogo/:id",isAuthenticated, employeeOrganisationlogo);
 
 // POST /internship/create
 router.post("/internship/create",isAuthenticated, createInternship);
+
+// POST /internship/read/
+router.post("/internship/read/",isAuthenticated, readInternship);
+
+// POST /internship/read/:id
+router.post("/internship/read/:id",isAuthenticated, readSingleInternship);
 
 module.exports = router;

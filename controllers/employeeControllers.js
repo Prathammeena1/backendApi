@@ -125,3 +125,13 @@ exports.createInternship = catchAsyncError(async (req, res, next) => {
   await employee.save();
   res.status(201).json({ employee,newInternship });
 });
+
+exports.readInternship = catchAsyncError(async (req, res, next) => {
+  const internships = await internshipModel.find().exec();
+  res.status(200).json({ employee,internships });
+});
+
+exports.readSingleInternship = catchAsyncError(async (req, res, next) => {
+  const internship = await internshipModel.findById(req.params.id);
+  res.status(200).json({ employee,internship });
+});
