@@ -125,6 +125,8 @@ exports.studentApplyInternship = catchAsyncError(async (req, res, next) => {
   const student = await studentModel.findById(req.id);
   const internship = await internshipModel.findById(req.params.id);
   student.internships.push(internship._id);
+  internship.students.push(student._id);
   await student.save();
+  await internship.save();
   res.json({ student });
 });

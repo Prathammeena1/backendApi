@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema(
   {
+    students: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
     employee: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
     title: String,
     type: {
