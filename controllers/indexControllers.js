@@ -1,6 +1,7 @@
 const { catchAsyncError } = require("../middlewares/catchAsyncError");
 const studentModel = require("../models/studentModel");
 const internshipModel = require("../models/internshipModel");
+const jobModel = require("../models/jobModel");
 const { SendMail } = require("../utils/SendMail");
 const { settoken } = require("../utils/SetToken");
 const ErrorHandler = require("../utils/errorHandler");
@@ -128,5 +129,15 @@ exports.studentApplyInternship = catchAsyncError(async (req, res, next) => {
   internship.students.push(student._id);
   await student.save();
   await internship.save();
+  res.json({ student });
+});
+
+exports.studentApplyJob = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id);
+  const job = await jobModel.findById(req.params.id);
+  student.jobs.push(job._id);
+  job.students.push(student._id);
+  await student.save();
+  await job.save();
   res.json({ student });
 });
