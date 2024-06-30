@@ -53,10 +53,10 @@ const employeeSchema = new mongoose.Schema(
       trim: true,
     },
     internships:[
-        {type:mongoose.Schema.Types.ObjectId,ref:'internship'}
+        {type:mongoose.Schema.Types.ObjectId,ref:'Internship'}
     ],
     jobs:[
-        {type:mongoose.Schema.Types.ObjectId,ref:'job'}
+        {type:mongoose.Schema.Types.ObjectId,ref:'Job'}
     ]
   },
   { timestamps: true }
