@@ -9,6 +9,7 @@ const {
   studentResetPassword,
   studentUpdate,
   studentAvatar,
+  studentApplyInternship,
 } = require("../controllers/indexControllers");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -39,5 +40,11 @@ router.post("/student/update/:id",isAuthenticated, studentUpdate);
 
 // POST /student/update
 router.post("/student/avatar/:id",isAuthenticated, studentAvatar);
+
+
+// ----------------------------apply internships ---------------------------- 
+
+// POST /student/update
+router.post("/student/apply/internship/:id",isAuthenticated, studentApplyInternship);
 
 module.exports = router;

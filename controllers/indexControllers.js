@@ -1,5 +1,6 @@
 const { catchAsyncError } = require("../middlewares/catchAsyncError");
 const studentModel = require("../models/studentModel");
+const internshipModel = require("../models/internshipModel");
 const { SendMail } = require("../utils/SendMail");
 const { settoken } = require("../utils/SetToken");
 const ErrorHandler = require("../utils/errorHandler");
@@ -117,5 +118,13 @@ exports.studentAvatar = catchAsyncError(async (req, res, next) => {
   student.avatar = { fileId, url };
   await student.save();
 
+  res.json({ student });
+});
+
+exports.studentApplyInternship = catchAsyncError(async (req, res, next) => {
+  const student = await studentModel.findById(req.id);
+  const internship = await internshipModel.findById(req.params.id);
+  student.internships.push(internship._id);
+  await student.save();
   res.json({ student });
 });
