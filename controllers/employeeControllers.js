@@ -1,5 +1,6 @@
 const { catchAsyncError } = require("../middlewares/catchAsyncError");
 const employeeModel = require("../models/employeeModel");
+const jobModel = require("../models/jobModel");
 const internshipModel = require("../models/internshipModel");
 const { SendMail } = require("../utils/SendMail");
 const { settoken } = require("../utils/SetToken");
@@ -118,6 +119,8 @@ exports.employeeOrganisationlogo = catchAsyncError(async (req, res, next) => {
   res.json({ employee });
 });
 
+// -----------------------------------------------------internships --------------------------------
+
 exports.createInternship = catchAsyncError(async (req, res, next) => {
   const employee = await employeeModel.findById(req.id);
   const newInternship = await new internshipModel({...req.body,employee:employee._id}).save();
@@ -134,4 +137,25 @@ exports.readInternship = catchAsyncError(async (req, res, next) => {
 exports.readSingleInternship = catchAsyncError(async (req, res, next) => {
   const internship = await internshipModel.findById(req.params.id);
   res.status(200).json({ internship });
+});
+
+
+//  ----------------------------------------------------------------jobs ----------------------------------------------------------------
+
+exports.createJob = catchAsyncError(async (req, res, next) => {
+  const employee = await employeeModel.findById(req.id);
+  const newjob = await new jobModel({...req.body,employee:employee._id}).save();
+  employee.jobs.push(newjob._id);
+  await employee.save();
+  res.status(201).json({ employee,newjob });
+});
+
+exports.readJob = catchAsyncError(async (req, res, next) => {
+  const {jobs} = await employeeModel.findById(req.id).populate('jobs');
+  res.status(200).json({ jobs });
+});
+
+exports.readSingleJob = catchAsyncError(async (req, res, next) => {
+  const job = await jobModel.findById(req.params.id);
+  res.status(200).json({ job });
 });
