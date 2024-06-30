@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const internshipSchema = new mongoose.Schema(
   {
-    internships: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
+    employee: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
     profile: String,
     type: {
       type: String,

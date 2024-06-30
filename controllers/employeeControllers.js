@@ -120,7 +120,7 @@ exports.employeeOrganisationlogo = catchAsyncError(async (req, res, next) => {
 
 exports.createInternship = catchAsyncError(async (req, res, next) => {
   const employee = await employeeModel.findById(req.id);
-  const newInternship = await new internshipModel(req.body).save();
+  const newInternship = await new internshipModel({...req.body,employee:employee._id}).save();
   employee.internships.push(newInternship._id);
   await employee.save();
   res.status(201).json({ employee,newInternship });
