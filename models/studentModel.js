@@ -16,20 +16,17 @@ const studentSchema = new mongoose.Schema(
     },
     contact:{
       type: String,
-      required: [true, "First Name is required"],
       trim: true,
       maxLength:[12,'Contact must not exceed 12 characters'],
       mixLength:[10,'Contact should atleast contain 10 characters'],
     },
     city:{
       type: String,
-      required: [true, "City is required"],
       trim: true,
     },
     gender:{
       type:String,
       enum: ["Male", "Female", "Others"],
-      required:[true, "Gender is required"]
     },
     email: {
       type: String,
