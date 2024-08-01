@@ -1,6 +1,13 @@
 require("dotenv").config("path", "./.env");
 const express = require("express");
 const app = express();
+const cors = require("cors"); // Install cors package: npm install cors
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from this origin
+  })
+);
 
 // db connection
 require("./models/databaseConnection.js").databaseConnection();
@@ -10,23 +17,23 @@ app.use(require("morgan")("dev"));
 
 // bodyParser
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 // session
-const expressSession = require('express-session')
-app.use(expressSession({
-  resave:true,
-  saveUninitialized:true,
-  secret:process.env.EXPRESS_SESSION_SECRET
-}))
+const expressSession = require("express-session");
+app.use(
+  expressSession({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.EXPRESS_SESSION_SECRET,
+  })
+);
 // cookie parser
-const cookieParser = require('cookie-parser')
-app.use(cookieParser())
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 // express-fileupload
-const fileupload = require('express-fileupload')
+const fileupload = require("express-fileupload");
 app.use(fileupload());
-
-
 
 app.use("/", require("./routes/indexRouter.js"));
 app.use("/resume", require("./routes/resumeRouter.js"));
