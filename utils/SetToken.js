@@ -6,7 +6,7 @@ exports.settoken = async (employee, statusCode, res, req) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure:true
+    // secure:true
   };
   
   res

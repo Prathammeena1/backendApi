@@ -1,13 +1,14 @@
 require("dotenv").config("path", "./.env");
 const express = require("express");
 const app = express();
-const cors = require("cors"); // Install cors package: npm install cors
 
-app.use(
-  cors({
-    origin: "http://localhost:5173", // Allow requests from this origin
-  })
-);
+
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:5173', // Replace with your frontend domain
+  credentials: true
+}));
+
 
 // db connection
 require("./models/databaseConnection.js").databaseConnection();
@@ -29,12 +30,14 @@ app.use(
   })
 );
 // cookie parser
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 // express-fileupload
 const fileupload = require("express-fileupload");
 app.use(fileupload());
 
+
+// routes
 app.use("/", require("./routes/indexRouter.js"));
 app.use("/resume", require("./routes/resumeRouter.js"));
 app.use("/employee", require("./routes/employeeRouter.js"));
