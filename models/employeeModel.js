@@ -49,7 +49,6 @@ const employeeSchema = new mongoose.Schema(
     },
     organisationname:{
       type: String,
-      required: [true, "Organisation Name is required"],
       trim: true,
     },
     internships:[

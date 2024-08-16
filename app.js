@@ -39,6 +39,8 @@ app.use(fileupload());
 
 // routes
 app.use("/", require("./routes/indexRouter.js"));
+app.use("/", require("./routes/internships.js"));
+app.use("/", require("./routes/jobs.js"));
 app.use("/resume", require("./routes/resumeRouter.js"));
 app.use("/employee", require("./routes/employeeRouter.js"));
 
