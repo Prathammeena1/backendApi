@@ -167,11 +167,37 @@ exports.readSingleInternship = catchAsyncError(async (req, res, next) => {
 //  ----------------------------------------------------------------jobs ----------------------------------------------------------------
 
 exports.createJob = catchAsyncError(async (req, res, next) => {
-  const employee = await employeeModel.findById(req.id);
-  const newjob = await new jobModel({...req.body,employee:employee._id}).save();
-  employee.jobs.push(newjob._id);
+  const employee = await employeeModel.findById(req.id); // Get the employee by ID
+
+  const file = req.files.image; // Access the uploaded file
+  // console.log(file)
+  
+  
+  if (!file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+  
+  const modifiedFileName = `job-${Date.now()}${path.extname(file.name)}`;
+  
+  const { fileId, url } = await imagekit.upload({
+    file: file.data,
+    fileName: modifiedFileName,
+  });
+  
+  const newJob = new jobModel({
+    ...req.body,
+    employee: employee._id,
+    image: { fileId, url }, // Store the file ID and URL
+  });
+
+  await newJob.save();
+
+  console.log(newJob)
+
+  employee.jobs.push(newJob._id);
   await employee.save();
-  res.status(201).json({ employee,newjob });
+
+  res.status(201).json({ employee, newJob });
 });
 
 exports.readJob = catchAsyncError(async (req, res, next) => {
