@@ -140,6 +140,8 @@ exports.createInternship = catchAsyncError(async (req, res, next) => {
     fileName: modifiedFileName,
   });
 
+  // console.log(req.body)
+
   const newInternship = new internshipModel({
     ...req.body,
     employee: employee._id,
@@ -192,7 +194,7 @@ exports.createJob = catchAsyncError(async (req, res, next) => {
 
   await newJob.save();
 
-  console.log(newJob)
+  // console.log(newJob)
 
   employee.jobs.push(newJob._id);
   await employee.save();
