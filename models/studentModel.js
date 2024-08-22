@@ -66,7 +66,7 @@ const studentSchema = new mongoose.Schema(
     },
     internships:[
       {type:mongoose.Schema.Types.ObjectId,ref:'Internship'}
-  ],
+    ],
   jobs:[
       {type:mongoose.Schema.Types.ObjectId,ref:'Job'}
   ]
